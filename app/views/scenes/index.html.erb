@@ -1,0 +1,7 @@
+<h1> Scenes </h1> 
+
+<% @scenes.each do |s| %>
+    <%= link_to s.title, project_scene_path(params[:project_id], s) %><br>
+<% end %>
+
+<%= link_to 'Create new Scene', new_project_scene_path(params[:project_id]) %>

@@ -4,15 +4,17 @@ class SettsController < ApplicationController
     end 
     
     def create 
-        @sett = current_project.build(setts_params)
+        @sett = current_project.setts.build(setts_params)
         @sett.save
         redirect_to project_setts_path(params[:project_id])
     end 
 
     def index 
+        @setts = current_project.setts
     end 
 
     def show
+        @sett = Sett.find(params[:id])
     end
 
     private
