@@ -1,2 +1,4 @@
 <h1><%= @project.title %></h1>
-<h2><%= link_to 'Create Character', new_character_path %></h2>
+<h2><%= link_to 'Characters', project_characters_path(params[:id]) %></h2><br>
+<h2><%= link_to 'new Settings', new_project_sett_path(params[:id]) %></h2><br>
+<h2><%= link_to 'Scenes', project_scenes_path(params[:id]) %></h2><br>

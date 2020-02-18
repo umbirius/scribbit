@@ -1,3 +1,3 @@
 <h1> Hi <%= @user.username%>, welcome to ScriptMate!</h1>
-<%= link_to 'start a new project', new_project_path %></br>
+<%= link_to 'Projects', projects_path %></br>
 <%= link_to 'logout', destroy_user_session_path, method: :delete %>

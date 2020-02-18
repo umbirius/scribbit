@@ -1,0 +1,2 @@
+class Sett < ApplicationRecord
+end

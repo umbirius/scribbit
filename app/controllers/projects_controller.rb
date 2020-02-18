@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
     def create
 
         @project = current_user.projects.build(project_params)
-        @project.user = current_user
         @project.save
         redirect_to projects_url(@project)
     end
@@ -17,8 +16,7 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
-        session[:project] = @project_params
-        byebug
+        user_session[:project] = @project
     end
 
 

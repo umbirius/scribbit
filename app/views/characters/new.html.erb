@@ -1,4 +1,4 @@
-<%= form_for @character do |f| %> 
+<%= form_for @character, url: project_characters_path, html: { method: :post } do |f| %> 
     <%= f.label :name %> 
     <%= f.text_field :name %><br>
     <%= f.label :age %> 
