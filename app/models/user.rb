@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :characters, through: :projects
   has_many :setts, through: :projects
   has_many :scenes, through: :projects
+  has_many :posts
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
