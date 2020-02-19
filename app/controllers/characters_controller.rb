@@ -37,6 +37,13 @@ class CharactersController < ApplicationController
         end 
     end
 
+    def destroy 
+        @character = Character.find(params[:id])
+        @character.destroy 
+        flash[:notice] = "#{@character.name} has been deleted"
+        redirect_to project_characters_path(params[:project_id])
+    end
+
     private 
     
     def character_params
