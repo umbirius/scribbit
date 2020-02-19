@@ -26,7 +26,7 @@ class SettsController < ApplicationController
         @sett = Sett.find(params[:id])
         @sett.update(setts_params)
         if @sett.save
-            redirect_to project_sett_url(params[:project_id], @sett )
+            redirect_to project_sett_url(params[:project_id], @sett)
         else 
             render :edit
         end 
