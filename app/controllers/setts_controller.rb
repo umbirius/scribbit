@@ -5,8 +5,11 @@ class SettsController < ApplicationController
     
     def create 
         @sett = current_project.setts.build(setts_params)
-        @sett.save
-        redirect_to project_setts_path(params[:project_id])
+        if @sett.save
+            redirect_to project_setts_path(params[:project_id])
+        else 
+            render :new 
+        end
     end 
 
     def index 
