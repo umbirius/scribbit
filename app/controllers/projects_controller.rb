@@ -4,10 +4,12 @@ class ProjectsController < ApplicationController
     end 
 
     def create
-
         @project = current_user.projects.build(project_params)
-        @project.save
-        redirect_to projects_url(@project)
+        if @project.save
+            redirect_to projects_url(@project)
+        else 
+            render :new
+        end
     end
 
     def index 
