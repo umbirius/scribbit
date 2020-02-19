@@ -1,0 +1,9 @@
+<%= form_for @scene, url: project_scene_path(@scene), html: { method: :patch } do |f| %> 
+    <%= f.label :title %> 
+    <%= f.text_field :title %><br> 
+    <%= f.label :description %> 
+    <%= f.text_field :description %><br>
+    <%= f.label :order %> 
+    <%= f.text_field :order%><br>
+    <%= f.submit %>
+<% end %>
