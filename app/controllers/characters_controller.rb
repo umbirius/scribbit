@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
     def create 
         @character = current_project.characters.build(character_params)
         if @character.save
-            redirect_to project_characters_url(params(:project_id))
+            redirect_to project_characters_url(params[:project_id])
         else 
             render :new 
         end
@@ -29,7 +29,8 @@ class CharactersController < ApplicationController
 
     def update 
         @character = Character.find(params[:id])
-        if @character.update(character_params)
+        @character.update(character_params)
+        if @character.save
             redirect_to project_characters_url(params[:project_id])
         else 
             render :edit

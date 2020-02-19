@@ -1,2 +1,3 @@
 <h1><%= @character.name %></h1>
-<%= link_to 'Back to Characters', project_characters_path(params[:project_id])%>
+<%= link_to 'Back to Characters', project_characters_path(params[:project_id])%><br>
+<%= link_to 'Edit Character', edit_project_character_path(params[:project_id], @character)%><br> 
