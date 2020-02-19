@@ -6,8 +6,11 @@ class ScenesController < ApplicationController
 
     def create
         @scene = current_project.scenes.build(scenes_params)
-        @scene.save
-        redirect_to project_scenes_url(params[:project_id])
+        if @scene.save
+            redirect_to project_scenes_url(params[:project_id])
+        else 
+            render :new
+        end 
     end 
 
     def index
