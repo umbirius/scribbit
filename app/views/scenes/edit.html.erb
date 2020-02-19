@@ -1,4 +1,4 @@
-<%= form_for @scene, url: project_scene_path(@scene), html: { method: :patch } do |f| %> 
+<%= form_for @scene, url: project_scene_path(params[:project_id], @scene), html: { method: :patch } do |f| %> 
     <%= f.label :title %> 
     <%= f.text_field :title %><br> 
     <%= f.label :description %> 

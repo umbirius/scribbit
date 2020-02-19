@@ -1,4 +1,4 @@
-<%= form_for @sett, url: project_sett_path(@sett), html: { method: :patch } do |f| %> 
+<%= form_for @sett, url: project_sett_path(params[:project_id], @sett), html: { method: :patch } do |f| %> 
     <%= f.label :name %> 
     <%= f.text_field :name %><br>
     <%= f.label :location %> 
