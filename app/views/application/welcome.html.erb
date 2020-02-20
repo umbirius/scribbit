@@ -1,3 +1,6 @@
 <h1> Hi <%= @user.username%>, welcome to scribbit!</h1>
-<%= link_to 'Projects', projects_path %></br>
+<h2><%= link_to "All Projects (#{current_user.projects.length}) " , projects_path %></h2></br>
+<h2><%= link_to "All Characters (#{current_user.characters.length})", characters_path %></h2><br>
+<h2><%= link_to "All Settings (#{current_user.setts.length})", setts_path %></h2><br>
+<h2><%= link_to "All Scenes (#{current_user.scenes.length})", scenes_path %></h2><br>
 <%= link_to 'logout', destroy_user_session_path, method: :delete %>

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     resources :scenes
   end 
 
-  # resources :characters only new with drop down of project
+  resources :characters, :scenes, :setts
+  # only new with drop down of project
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

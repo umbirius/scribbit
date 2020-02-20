@@ -1,7 +1,7 @@
 <h1><%= @project.title %></h1>
-<h2><%= link_to 'Characters', project_characters_path(params[:id]) %></h2><br>
-<h2><%= link_to 'Settings', project_setts_path(params[:id]) %></h2><br>
-<h2><%= link_to 'Scenes', project_scenes_path(params[:id]) %></h2><br>
+<h2><%= link_to "Characters (#{@c_l})", project_characters_path(params[:id]) %></h2><br>
+<h2><%= link_to "Settings (#{@s_l})", project_setts_path(params[:id]) %></h2><br>
+<h2><%= link_to "Scenes (#{@sc_l})", project_scenes_path(params[:id]) %></h2><br>
 <%=link_to 'Edit Project', edit_project_path(params[:id]) %><br>
 <%=link_to 'Back to Projects',  projects_path %>
 <%= button_to "Delete Project", project_path(params[:id]), method: :delete %>

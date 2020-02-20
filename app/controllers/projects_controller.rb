@@ -18,6 +18,9 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        @c_l = @project.characters.length
+        @s_l = @project.setts.length
+        @sc_l = @project.scenes.length
         user_session[:project] = @project
     end
 
