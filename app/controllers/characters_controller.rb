@@ -18,7 +18,7 @@ class CharactersController < ApplicationController
 
         if @character.save && params[:project_id]
             redirect_to project_characters_url(params[:project_id])
-        elsif @character.save
+        elsif @character.save && !params[:project_id]
             redirect_to characters_url
         else 
             render :new 
@@ -48,13 +48,20 @@ class CharactersController < ApplicationController
 
     def edit 
         @character = Character.find(params[:id])
+        if params[:project_id]
+            @url = project_character_path(params[:project_id], @character)
+        else 
+            @url = character_path(@character)
+        end 
     end 
 
     def update 
         @character = Character.find(params[:id])
         @character.update(character_params)
-        if @character.save
+        if @character.save && params[:project_id]
             redirect_to project_characters_url(params[:project_id])
+        elsif @character.save && !params[:project_id]
+            redirect_to characters_url
         else 
             render :edit
         end 

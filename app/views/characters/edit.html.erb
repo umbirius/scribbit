@@ -1,4 +1,8 @@
-<%= form_for @character, url: project_character_path(params[:project_id], @character), html: { method: :patch } do |f| %> 
+<%= form_for @character, url: @url, html: { method: :patch } do |f| %> 
+    <% if !params[:project_id] %>
+        <%= f.label :project %> 
+        <%= f.collection_select :project, current_user.projects.order(:title), :title, :title %><br>
+    <% end %> 
     <%= f.label :name %> 
     <%= f.text_field :name %><br>
     <%= f.label :age %> 
