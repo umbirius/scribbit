@@ -1,10 +1,6 @@
 <h1>Characters</h1> 
 <% @characters.each do |c| %> 
-    <% if params[:project_id] %>
-        <li><%= link_to c.name, project_character_path(params[:project_id],c) %></li>
-    <% else %>
-        <li><%= link_to c.name, character_path(c) %></li>
-    <% end %>
+    <li><%= link_to c.name, project_character_path(c.project,c) %></li>
 <% end %> 
 <% if params[:project_id] %>
     <%= link_to 'Add Character', new_project_character_path(params[:project_id]) %></br>

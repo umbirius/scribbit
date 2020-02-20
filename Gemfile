@@ -72,3 +72,6 @@ gem "dotenv-rails", "~> 2.7"
 gem "omniauth", "~> 1.9"
 
 gem "omniauth-github", "~> 1.4"
+
+gem 'foundation-rails'
+gem 'autoprefixer-rails'
