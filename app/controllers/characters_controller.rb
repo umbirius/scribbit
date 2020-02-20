@@ -13,8 +13,14 @@ class CharactersController < ApplicationController
     end
 
     def index
-        @project = current_project
-        @characters = current_project.characters
+        byebug
+        if params[:user_id]
+            @characters = User.find(params[:user_id]).characters
+            @url = project_characters_path
+        else 
+            @characters = current_user.characters
+            @url = characters_path
+        end 
     end
 
     def show

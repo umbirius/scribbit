@@ -1,7 +1,15 @@
 <h1>Characters</h1> 
 <% @characters.each do |c| %> 
-    <li><%= link_to c.name, project_character_path(params[:project_id],c) %></li>
+    <% if params[:user_id] %>
+        <li><%= link_to c.name, project_character_path(params[:project_id],c) %></li>
+    <% else %>
+        <li><%= link_to c.name, character_path(c) %></li>
+    <% end %>
 <% end %> 
-
-<%= link_to 'Add Character', new_project_character_path(params[:project_id]) %></br>
-<%= link_to "Back to #{@project.title} page", project_path(params[:project_id])%>
+<% if params[:user_id] %>
+    <%= link_to 'Add Character', new_project_character_path(params[:project_id]) %></br>
+    <%= link_to "Back to #{@project.title} page", project_path(params[:project_id])%>
+<% else %>
+    <%= link_to 'Add Character', new_character_path %></br>
+    <%= link_to "Back to Home page", root_path%>
+<% end %>
