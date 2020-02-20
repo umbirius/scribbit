@@ -36,8 +36,14 @@ class CharactersController < ApplicationController
     end
 
     def show
-        @project = current_project 
-        @character = Character.find(params[:id])
+        if params[:project_id]
+            @project = current_project 
+            @character = Character.find(params[:id])
+            @url = project_characters_path
+        else 
+            @character = Character.find(params[:id])
+            @url = characters_path
+        end 
     end
 
     def edit 
