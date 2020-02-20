@@ -1,7 +1,14 @@
 <h1> Scenes </h1> 
-
-<% @scenes.each do |s| %>
-    <%= link_to s.title, project_scene_path(params[:project_id], s) %><br>
+<% if params[:project_id] %>
+    <% @scenes.each do |c| %> 
+        <li><%= link_to c.title, project_scene_path(c.project,c) %></li>
+    <% end %> 
+    <%= link_to 'Add Scene', new_project_scene_path(params[:project_id]) %></br>
+    <%= link_to "Back to #{Project.find(params[:project_id]).title} page", project_path(params[:project_id])%>  
+<% else %>
+    <% @scenes.each do |c| %> 
+        <li><%= link_to c.title, scene_path(c) %></li>
+    <% end %> 
+    <%= link_to 'Add Scene', new_scene_path %></br>
+    <%= link_to "Back to Home page", root_path%>
 <% end %>
-
-<%= link_to 'Create new Scene', new_project_scene_path(params[:project_id]) %>

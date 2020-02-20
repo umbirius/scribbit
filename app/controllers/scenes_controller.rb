@@ -2,19 +2,38 @@ class ScenesController < ApplicationController
     
     def new
         @scene = Scene.new
-    end 
-
-    def create
-        @scene = current_project.scenes.build(scenes_params)
-        if @scene.save
-            redirect_to project_scenes_url(params[:project_id])
+        if params[:project_id]
+            @url = project_scenes_path
         else 
-            render :new
+            @url = scenes_path
         end 
     end 
 
+    def create
+        if params[:project_id]
+            @scene = current_project.scenes.build(scene_params)
+        else 
+            @scene = Scene.new(scenes_params)
+            @scene.project = Project.find_by(title: params[:scene][:project])
+        end 
+
+        if @scene.save && params[:project_id]
+            redirect_to project_scenes_url(params[:project_id])
+        elsif @scene.save && !params[:project_id]
+            redirect_to scenes_url
+        else 
+            render :new 
+        end
+    end 
+
     def index
-        @scenes = current_project.scenes
+        if params[:project_id]
+            @scenes = Project.find(params[:project_id]).scenes
+            @url = project_scenes_path
+        else 
+            @scenes = current_user.scenes
+            @url = scenes_path
+        end 
     end
 
     def show 
