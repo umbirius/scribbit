@@ -6,7 +6,6 @@ class CharactersController < ApplicationController
         else 
             @url = characters_path
         end 
-        byebug
     end
 
     def create 
@@ -14,7 +13,7 @@ class CharactersController < ApplicationController
             @character = current_project.characters.build(character_params)
         else 
             @character = Character.new(character_params)
-            @character.user = params[:user]
+            @character.project = Project.find_by(title: params[:character][:project])
         end 
 
         if @character.save && params[:project_id]
