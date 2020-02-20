@@ -1,5 +1,10 @@
 <h1><%= @scene.title %></h1>
-<%= link_to 'Back to Scenes', project_scenes_path(params[:project_id])%><br>
-<%= link_to 'Edit Scene', edit_project_scene_path(params[:project_id], @scene)%><br>
-<%= button_to "Delete Scene", project_scene_path(params[:id], @scene), method: :delete %>
-
+<% if params[:project_id] %> 
+    <%= link_to 'Back to Scenes', project_scenes_path(params[:project_id])%><br>
+    <%= link_to 'Edit Scene', edit_project_scene_path(params[:project_id], @scene)%><br>
+    <%= button_to "Delete Scene", project_scene_path(params[:project_id], @scene), method: :delete %>
+<% else %> 
+    <%= link_to 'Back to Scenes', scenes_path %><br>
+    <%= link_to 'Edit Scene', edit_scene_path(@scene) %><br>
+    <%= button_to "Delete Scene", scene_path(@scene), method: :delete %>
+<% end %> 

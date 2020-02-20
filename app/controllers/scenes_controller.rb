@@ -38,6 +38,15 @@ class ScenesController < ApplicationController
 
     def show 
         @scene = Scene.find(params[:id])
+
+        if params[:project_id]
+            @project = current_project 
+            @scene = Scene.find(params[:id])
+            @url = project_scenes_path
+        else 
+            @scene = Scene.find(params[:id])
+            @url = scenes_path
+        end 
     end
 
     def edit 
