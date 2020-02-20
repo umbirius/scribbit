@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     end 
 
     def current_project
-        
+        Project.find(user_session["project"]["id"])
     end 
 
     protected 
@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end 
 
-
+    
 
 end

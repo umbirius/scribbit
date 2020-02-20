@@ -1,21 +1,34 @@
 class CharactersController < ApplicationController
     def new 
         @character = Character.new
+        if params[:project_id]
+            @url = project_characters_path
+        else 
+            @url = characters_path
+        end 
+        byebug
     end
 
     def create 
-        @character = current_project.characters.build(character_params)
-        if @character.save
+        if params[:project_id]
+            @character = current_project.characters.build(character_params)
+        else 
+            @character = Character.new(character_params)
+            @character.user = params[:user]
+        end 
+
+        if @character.save && params[:project_id]
             redirect_to project_characters_url(params[:project_id])
+        elsif @character.save
+            redirect_to characters_url
         else 
             render :new 
         end
     end
 
     def index
-        byebug
-        if params[:user_id]
-            @characters = User.find(params[:user_id]).characters
+        if params[:project_id]
+            @characters = Project.find(params[:project_id]).characters
             @url = project_characters_path
         else 
             @characters = current_user.characters
