@@ -10,38 +10,34 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-  <nav class="top-bar topbar-responsive">
-  <div class="top-bar-title">
-    <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
-      <button class="menu-icon" type="button" data-toggle></button>
-    </span>
-    <a class="topbar-responsive-logo" href="#"><strong>Site Title</strong></a>
-  </div>
-  <div id="topbar-responsive" class="topbar-responsive-links">
-    <div class="top-bar-right">
-      <ul class="menu simple vertical medium-horizontal">
-        <li><%= link_to "Projects", projects_path %></li>
-        <li><%= link_to "Characters", characters_path %></li>
-        <li><%= link_to "Settings", setts_path %></li>
-        <li><%= link_to "Scenes", scenes_path %></li>
-        <li>
-          <button type="button" class="button hollow topbar-responsive-button">Media</button>
-        </li>
-      </ul>
+
+
+<header class="sticky-shrinknav-header">
+  <h1 class="sticky-shrinknav-header-title">scribbit</h1>
+  <ul class="menu align-center sticky-shrinknav-menu">
+  <li><%= link_to "Home", root_path %></li>
+  <li><%= link_to "Projects", projects_path %></li>
+  <li><%= link_to "Characters", characters_path %></li>
+  <li><%= link_to "Settings", setts_path %></li>
+  <li><%= link_to "Scenes", scenes_path %></li>
+  </ul>
+</header>
+  
+
+
+<div class="row">
+    <div class="twelve columns"><br />
+      <header> 
+      <% if !!flash[:errors] %> 
+        <% flash[:errors].each do |e| %>
+          <%= e %><br>
+        <% end %>
+      <% end %>
+      </header>
+      <body>
+        <%= yield %>
+      </body>
     </div>
-  </div>
-</nav>
-  <body>
+</div>
 
-  <% if !!flash[:errors] %> 
-    <% flash[:errors].each do |e| %>
-      <%= e %><br>
-    <% end %>
-  <% end %>
-
-
-
-    <%= yield %>
-
-  </body>
 </html>
