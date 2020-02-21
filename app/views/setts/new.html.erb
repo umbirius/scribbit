@@ -1,4 +1,8 @@
-<%= form_for @sett, url: project_setts_path, html: { method: :post } do |f| %> 
+<%= form_for @sett, url: @url, html: { method: :post } do |f| %> 
+    <% if !params[:project_id] %>
+        <%= f.label :project %> 
+        <%= f.collection_select :project, current_user.projects.order(:title), :title, :title %><br>
+    <% end %> 
     <%= f.label :name %> 
     <%= f.text_field :name %><br>
     <%= f.label :location %> 

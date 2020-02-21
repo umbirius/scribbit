@@ -1,19 +1,38 @@
 class SettsController < ApplicationController
     def new
-        @sett = Sett.new 
+        @sett = Sett.new
+        if params[:project_id]
+            @url = project_setts_path
+        else 
+            @url = setts_path
+        end 
     end 
     
     def create 
-        @sett = current_project.setts.build(setts_params)
-        if @sett.save
-            redirect_to project_setts_path(params[:project_id])
+        if params[:project_id]
+            @sett = current_project.setts.build(sett_params)
+        else 
+            @sett = Sett.new(sett_params)
+            @sett.project = Project.find_by(title: params[:sett][:project])
+        end 
+
+        if @sett.save && params[:project_id]
+            redirect_to project_setts_url(params[:project_id])
+        elsif @sett.save && !params[:project_id]
+            redirect_to setts_url
         else 
             render :new 
         end
     end 
 
     def index 
-        @setts = current_project.setts
+        if params[:project_id]
+            @setts = Project.find(params[:project_id]).setts
+            @url = project_setts_path
+        else 
+            @setts = current_user.setts
+            @url = setts_path
+        end 
     end 
 
     def show
@@ -44,7 +63,7 @@ class SettsController < ApplicationController
 
     private
 
-    def setts_params
+    def sett_params
         params.require(:sett).permit(:name, :location, :description)
     end 
 
