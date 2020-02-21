@@ -21,6 +21,7 @@ class CharactersController < ApplicationController
         elsif @character.save && !params[:project_id]
             redirect_to characters_url
         else 
+            flash[:errors] = @character.errors.full_messages
             render :new 
         end
     end
