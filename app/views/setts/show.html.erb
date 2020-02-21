@@ -1,4 +1,10 @@
 <h1><%= @sett.name %></h1>
-<%= link_to 'Back to Settings', project_setts_path(params[:project_id]) %><br>
-<%= link_to 'Edit Setting', edit_project_sett_path(params[:project_id], @sett) %><br>
-<%= button_to "Delete Setting", project_sett_path(params[:id], @sett), method: :delete %>
+<% if params[:project_id] %>
+    <%= link_to 'Back to Settings', project_setts_path(params[:project_id]) %><br>
+    <%= link_to 'Edit Setting', edit_project_sett_path(params[:project_id], @sett) %><br>
+    <%= button_to "Delete Setting", project_sett_path(params[:id], @sett), method: :delete %>
+<% else %> 
+    <%= link_to 'Back to Settings', setts_path %><br>
+    <%= link_to 'Edit Setting', edit_sett_path(@sett) %><br>
+    <%= button_to "Delete Setting", sett_path(@sett), method: :delete %>
+<% end %> 

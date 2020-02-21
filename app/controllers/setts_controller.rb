@@ -36,19 +36,32 @@ class SettsController < ApplicationController
     end 
 
     def show
-        @sett = Sett.find(params[:id])
+        if params[:project_id]
+            @project = current_project
+            @sett = Sett.find(params[:id])
+            @url = project_setts_path
+        else 
+            @sett = Sett.find(params[:id])
+            @url = setts_path
+        end 
     end
 
     def edit 
         @sett = Sett.find(params[:id])
-
+        if params[:project_id]
+            @url = project_sett_path(params[:project_id], @sett)
+        else 
+            @url = sett_path(@sett)
+        end 
     end 
 
     def update 
         @sett = Sett.find(params[:id])
-        @sett.update(setts_params)
-        if @sett.save
-            redirect_to project_sett_url(params[:project_id], @sett)
+        @sett.update(sett_params)
+        if @sett.save && params[:project_id]
+            redirect_to project_setts_url(params[:project_id])
+        elsif @sett.save && !params[:project_id]
+            redirect_to setts_url
         else 
             render :edit
         end 
@@ -58,7 +71,11 @@ class SettsController < ApplicationController
         @sett = Sett.find(params[:id])
         @sett.destroy 
         flash[:notice] = "#{@sett.name} has been deleted"
-        redirect_to project_setts_path(params[:project_id])
+        if params[:project_id]
+            redirect_to project_setts_path(params[:project_id])
+        else 
+            redirect_to setts_path
+        end
     end
 
     private
