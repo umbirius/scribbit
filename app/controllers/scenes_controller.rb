@@ -10,10 +10,11 @@ class ScenesController < ApplicationController
     end 
 
     def create
+        byebug
         if params[:project_id]
             @scene = current_project.scenes.build(scene_params)
         else 
-            @scene = Scene.new(scenes_params)
+            @scene = Scene.new(scene_params)
             @scene.project = Project.find_by(title: params[:scene][:project])
         end 
 
@@ -22,6 +23,7 @@ class ScenesController < ApplicationController
         elsif @scene.save && !params[:project_id]
             redirect_to scenes_url
         else 
+            flash[:errors] = @scene.errors.full_messages
             render :new 
         end
     end 
@@ -55,6 +57,7 @@ class ScenesController < ApplicationController
         if params[:project_id]
             @url = project_scene_path(params[:project_id], @scene)
         else 
+            flash[:errors] = @scene.errors.full_messages
             @url = scene_path(@scene)
         end 
     end 
