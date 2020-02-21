@@ -52,6 +52,7 @@ class CharactersController < ApplicationController
         if params[:project_id]
             @url = project_character_path(params[:project_id], @character)
         else 
+            flash[:errors] = @character.errors.full_messages
             @url = character_path(@character)
         end 
     end 

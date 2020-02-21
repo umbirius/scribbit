@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
         if @project.save
             redirect_to project_url(@project)
         else 
+            flash[:errors] = @project.errors.full_messages
             render :new
         end
     end
@@ -35,6 +36,7 @@ class ProjectsController < ApplicationController
         if @project.save
             redirect_to project_url
         else 
+            flash[:errors] = @project.errors.full_messages
             render :edit
         end 
     end
