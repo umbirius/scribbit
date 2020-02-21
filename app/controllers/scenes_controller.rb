@@ -51,14 +51,21 @@ class ScenesController < ApplicationController
 
     def edit 
         @scene = Scene.find(params[:id])
-
+        @scene = Scene.find(params[:id])
+        if params[:project_id]
+            @url = project_scene_path(params[:project_id], @scene)
+        else 
+            @url = scene_path(@scene)
+        end 
     end 
 
     def update 
         @scene = Scene.find(params[:id])
-        @scene.update(scenes_params)
-        if @scene.save
-            redirect_to project_scene_url(params[:project_id], @scene )
+        @scene.update(scene_params)
+        if @scene.save && params[:project_id]
+            redirect_to project_scenes_url(params[:project_id])
+        elsif @scene.save && !params[:project_id]
+            redirect_to scenes_url
         else 
             render :edit
         end 
@@ -68,10 +75,14 @@ class ScenesController < ApplicationController
         @scene = Scene.find(params[:id])
         @scene.destroy 
         flash[:notice] = "#{@scene.title} has been deleted"
-        redirect_to project_scenes_path(params[:project_id])
+        if params[:project_id]
+            redirect_to project_scenes_path(params[:project_id])
+        else 
+            redirect_to scenes_path
+        end
     end
     private 
-    def scenes_params
+    def scene_params
         params.require(:scene).permit(:title, :description, :order)
     end 
 end

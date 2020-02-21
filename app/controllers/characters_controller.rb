@@ -71,7 +71,11 @@ class CharactersController < ApplicationController
         @character = Character.find(params[:id])
         @character.destroy 
         flash[:notice] = "#{@character.name} has been deleted"
-        redirect_to project_characters_path(params[:project_id])
+        if params[:project_id]
+            redirect_to project_characters_path(params[:project_id])
+        else 
+            redirect_to characters_path
+        end
     end
 
     private 
