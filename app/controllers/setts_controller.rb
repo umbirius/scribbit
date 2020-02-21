@@ -21,6 +21,7 @@ class SettsController < ApplicationController
         elsif @sett.save && !params[:project_id]
             redirect_to setts_url
         else 
+            flash[:errors] = @sett.errors.full_messages
             render :new 
         end
     end 
@@ -63,6 +64,7 @@ class SettsController < ApplicationController
         elsif @sett.save && !params[:project_id]
             redirect_to setts_url
         else 
+            flash[:errors] = @sett.errors.full_messages
             render :edit
         end 
     end
