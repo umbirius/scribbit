@@ -1,14 +1,43 @@
-<h1> Scenes </h1> 
+
 <% if params[:project_id] %>
+<h1> <%=Project.find(params[:project_id]).title %>: Scenes </h1> 
     <% @scenes.each do |c| %> 
-        <li><%= link_to c.title, project_scene_path(c.project,c) %></li>
+        <table>
+            <tr>
+                <th>Order</th>
+                <th>Title</th>
+                <th> </th>
+                <th> </th>               
+            </tr>
+            <tr>
+                <td><%= c.order %></td>
+                <td><%= link_to c.title, project_scene_path(c.project,c) %></td>
+                <td><%= link_to 'Edit Scene', edit_project_scene_path(params[:project_id], c)%></td>
+                <td><%= button_to "Delete Scene", project_scene_path(params[:project_id], c), method: :delete %></td>
+            </tr>
+        <table>
     <% end %> 
     <%= link_to 'Add Scene', new_project_scene_path(params[:project_id]) %></br>
     <%= link_to "Back to #{Project.find(params[:project_id]).title} page", project_path(params[:project_id])%>  
 <% else %>
     <% @scenes.each do |c| %> 
-        <li><%= link_to c.title, scene_path(c) %></li>
-    <% end %> 
+        <table>
+            <tr>
+                <th>Project<th>
+                <th>Order</th>
+                <th>Title</th>
+                <th> </th>
+                <th> </th>               
+            </tr>
+            <tr>
+                <td><%= link_to c.project.title, project_path(c.project) %></td>
+                <td><%= c.order %></td>
+                <td><%= link_to c.title, scene_path(c) %></td>
+                <td><%= link_to 'Edit Scene', edit_scene_path(c)%></td>
+                <td><%= button_to "Delete Scene", scene_path(c), method: :delete %></td>
+            </tr>
+        <table>
+<% end %> 
     <%= link_to 'Add Scene', new_scene_path %></br>
     <%= link_to "Back to Home page", root_path%>
 <% end %>
