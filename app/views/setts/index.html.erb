@@ -1,14 +1,41 @@
-<h1> Settings </h1> 
 <% if params[:project_id] %>
-    <% @setts.each do |c| %> 
-        <li><%= link_to c.name, project_sett_path(c.project,c) %></li>
-    <% end %> 
+    <h1> <%=Project.find(params[:project_id]).title %>: Settings </h1> 
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Description</th>
+            <th> </th> <!-- can add scope for qty of scenes in -->
+            <th> </th>               
+        </tr>
+        <% @setts.each do |c| %> 
+            <tr>
+                <td><%= link_to c.location, project_sett_path(c.project,c) %></td>
+                <td><%= c.description %></td>
+                <td><%= link_to 'Edit', edit_project_sett_path(params[:project_id], c)%></td>
+                <td><%= button_to "Delete", project_sett_path(params[:project_id], c), method: :delete %></td>
+            </tr>
+        <% end %> 
+    </table>
     <%= link_to 'Add Setting', new_project_sett_path(params[:project_id]) %></br>
     <%= link_to "Back to #{Project.find(params[:project_id]).title} page", project_path(params[:project_id])%>  
 <% else %>
-    <% @setts.each do |c| %> 
-        <li><%= link_to c.name, sett_path(c) %></li>
-    <% end %> 
+    <h1>Settings</h1> 
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Description</th>
+            <th> </th> <!-- can add scope for qty of scenes in -->
+            <th> </th>              
+        </tr>
+        <% @setts.each do |c| %> 
+            <tr>
+                <td><%= link_to c.location, sett_path(c) %></td>
+                <td><%= c.description %></td>
+                <td><%= link_to 'Edit', edit_sett_path(c)%></td>
+                <td><%= button_to "Delete", sett_path(c), method: :delete %></td>
+            </tr>
+        <% end %> 
+    </table>
     <%= link_to 'Add Setting', new_sett_path %></br>
     <%= link_to "Back to Home page", root_path%>
 <% end %>

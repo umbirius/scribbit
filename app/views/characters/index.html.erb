@@ -39,8 +39,8 @@
                     <td><%= link_to c.name, character_path(c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
-                    <td><%= button_to "Delete Character", character_path( c), method: :delete %></td>
-                    <td><%= link_to 'Edit Character', edit_character_path( c)%></td>
+                    <td><%= button_to "Delete", character_path( c), method: :delete %></td>
+                    <td><%= link_to 'Edit', edit_character_path( c)%></td>
                 </tr>
         <% end %> 
     </table>
