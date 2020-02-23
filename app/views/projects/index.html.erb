@@ -2,9 +2,9 @@
 
 <p>
 
-    <%= form_for :filter, url: projects_path, html: { method: :get } do |f| %> 
+    <%= form_for :sorts, url: projects_path, html: { method: :get } do |f| %> 
         <%= f.label :filter %> 
-        <%= f.select :filter, ['default', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'] %>
+        <%= f.select :filter, ['none', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'], :selected => params[:sorts][:filter] %>
         <%= f.submit "Filter" %>
     <% end %>
 

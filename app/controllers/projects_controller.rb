@@ -14,7 +14,13 @@ class ProjectsController < ApplicationController
     end
 
     def index 
-        @projects = current_user.projects
+        if params[:sorts] && !params[:sorts][:filter] == "none"
+            @filter = params[:sorts][:filter]
+            byebug
+            @projects = current_user.projects.sort_by_type(@filter)
+        else 
+            @projects = current_user.projects 
+        end 
     end
 
     def show

@@ -7,4 +7,10 @@ class Project < ApplicationRecord
     validates :description, presence:true
     validates :form, presence:true
     validates :genre, presence:true
+
+    scope :sort_by_type, -> (type) {reorder("LOWER(#{type})" +" "+ "asc")}
+
+    def self.sort_by_type(type)
+        (reorder("LOWER(#{type})" +" "+ "asc"))
+    end 
 end
