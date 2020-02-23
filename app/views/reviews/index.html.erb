@@ -18,7 +18,29 @@
     <% end %> 
 </table>
 
+<p><%= link_to "Request a review", new_review_path %></p>
+
 <h4> Accepted Requests: Other Users</h4>
+<table>
+    <th>Review Request Date</th>
+    <th>User</th>
+    <th>Project</th>
+    <th>Genre</th>
+    <th>Accepted</th>
+    <th>Status<th> 
+    <th></th>
+    <% @acc_reviews.each do |rr| %> 
+        <tr> 
+            <td><%= rr.created_at.strftime("%m/%d/%Y")  %></td>
+            <td><%= User.find(rr.reviewee_id).username %></td>
+            <td><%= rr.project.title %></td>
+            <td><%= rr.project.genre %></td>
+            <td><%= rr.accepted %></td>
+            <td><%= rr.review_status%></td>
+            <td><%= button_to "Cancel", review_path(rr), method: :patch %></td>
+        <tr>
+    <% end %> 
+</table>
 
 <h4> Active Requests: Other Users</h4>
 
@@ -38,11 +60,10 @@
             <td><%= rr.project.genre %></td>
             <td><%= rr.accepted %></td>
             <td><%= rr.review_status%></td>
-            
+            <td><%= button_to "Accept", review_path(rr), method: :patch %></td>
         <tr>
     <% end %> 
 </table>
 
-<p><%= link_to "Request a review", new_review_path %></p>
 
 <h4>Accept a peer review</h4>
