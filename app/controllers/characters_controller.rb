@@ -28,11 +28,25 @@ class CharactersController < ApplicationController
 
     def index
         if params[:project_id]
-            @characters = Project.find(params[:project_id]).characters
             @url = project_characters_path
+
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @characters = Project.find(params[:project_id]).characters.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @characters = Project.find(params[:project_id]).characters
+            end 
         else 
-            @characters = current_user.characters
             @url = characters_path
+
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @characters = current_user.characters.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @characters = current_user.characters
+            end 
         end 
     end
 

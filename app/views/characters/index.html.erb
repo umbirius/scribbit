@@ -2,13 +2,14 @@
 
 <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
     <%= f.label :filter %> 
-    <%= f.select :filter, ['none', 'name'], :selected => params[:sorts][:filter] %>
+    <%= f.select :filter, ['none', 'name', 'age'], :selected => @filter %>
     <%= f.submit "Filter" %>
 <% end %>
 
 <% if params[:project_id] %>
     <table>
         <tr>
+            <th>Project</th>
             <th>Name</th>
             <th>Age</th>
             <th>Bio</th>
@@ -17,6 +18,7 @@
         </tr>
         <% @characters.each do |c| %>
                 <tr> 
+                    <td><%= link_to c.project.title, project_path(c.project) %>
                     <td><%= link_to c.name, project_character_path(params[:project_id], c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
@@ -41,7 +43,6 @@
         </tr>
         <% @characters.each do |c| %>
                 <tr> 
-                    <td><%= link_to c.project.title, project_path(c.project) %>
                     <td><%= link_to c.name, character_path(c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
