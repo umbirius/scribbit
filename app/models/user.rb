@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :setts, through: :projects
   has_many :scenes, through: :projects
   has_many :posts
+  has_many :requested_reviews, foreign_key: :reviewee_id, class_name: "Review"
+  has_many :accepted_reviews, through: :requested_reviews, source: :reviewer
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
