@@ -1,5 +1,11 @@
 <h1>Characters</h1> 
 
+<%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
+    <%= f.label :filter %> 
+    <%= f.select :filter, ['none', 'name'], :selected => params[:sorts][:filter] %>
+    <%= f.submit "Filter" %>
+<% end %>
+
 <% if params[:project_id] %>
     <table>
         <tr>
