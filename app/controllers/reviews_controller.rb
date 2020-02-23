@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
     def index 
         @sub_reviews = current_user.requested_reviews
         @acc_reviews = current_user.accepted_reviews
-        byebug
         @req_reviews = Review.where.not(accepted: true, reviewee_id: 2)
     end
 
@@ -18,9 +17,18 @@ class ReviewsController < ApplicationController
         redirect_to reviews_path
     end
 
-    def accept 
-        @review = Review.find(params[:id])
-        @review.reviewer = current_user
+    def update
+        if params[:accepted] == "true"
+            @review = Review.find(params[:id])
+            @review.reviewer = current_user
+            @review.accepted = true
+            @review.save
+        elsif params[:accepted] == "false"
+            @review = Review.find(params[:id])
+            @review.reviewer = nil
+            @review.accepted = false
+            @review.save
+        end
         redirect_to reviews_path
     end 
 

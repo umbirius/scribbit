@@ -12,7 +12,9 @@ class User < ApplicationRecord
   has_many :scenes, through: :projects
   has_many :posts
   has_many :requested_reviews, foreign_key: :reviewee_id, class_name: "Review"
-  has_many :accepted_reviews, through: :requested_reviews, source: :reviewer
+  has_many :your_reviewers, through: :requested_reviews, source: :reviewer
+  has_many :accepted_reviews, foreign_key: :reviewer_id, class_name: "Review"
+  
 
 
   def self.from_omniauth(auth)

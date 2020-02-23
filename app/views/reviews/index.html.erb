@@ -37,7 +37,7 @@
             <td><%= rr.project.genre %></td>
             <td><%= rr.accepted %></td>
             <td><%= rr.review_status%></td>
-            <td><%= button_to "Cancel", review_path(rr), method: :patch %></td>
+            <td><%= button_to "Cancel", review_path(rr), method: :patch, params: {accepted: false} %></td>
         <tr>
     <% end %> 
 </table>
@@ -60,7 +60,7 @@
             <td><%= rr.project.genre %></td>
             <td><%= rr.accepted %></td>
             <td><%= rr.review_status%></td>
-            <td><%= button_to "Accept", review_path(rr), method: :patch %></td>
+            <td><%= button_to "Accept", review_path(rr), method: :patch, params:{ accepted: true} %></td>
         <tr>
     <% end %> 
 </table>
