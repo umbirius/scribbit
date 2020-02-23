@@ -1,8 +1,35 @@
 <h1>Projects</h1>
-<div> 
-<% @projects.each do |p| %> 
-    <li><%= link_to p.title, project_path(p)%></li> 
-<% end %>
 
+<p>
+
+    <%= form_for :filter, url: projects_path, html: { method: :get } do |f| %> 
+        <%= f.label :filter %> 
+        <%= f.select :filter, ['default', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'] %>
+        <%= f.submit "Filter" %>
+    <% end %>
+
+
+<p>Sort By Drop dowm form with partial that takes each drop down item and puts into method to pull info</p>
+<div>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Form</th>
+            <th>Characters</th>
+            <th>Settings</th>
+            <th>Scenes</th>
+        </tr>
+        <% @projects.each do |p| %>
+            <tr>
+                <td><%= link_to p.title, project_path(p)%></td> 
+                <td><%= p.genre %></td>
+                <td><%= p.form %></td>
+                <td><%= p.characters.count %></td>
+                <td><%= p.setts.count %></td>
+                <td><%= p.scenes.count %></td>
+            </tr>
+        <% end %>
+    </table>
 <%= link_to 'Add Project', new_project_path %>
 </div>  
