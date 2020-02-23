@@ -1,4 +1,5 @@
 class Review < ApplicationRecord
+    belongs_to :project
     # user wanting project reviewed
     belongs_to :reviewer, foreign_key: :reviewer_id, class_name: "User"
 

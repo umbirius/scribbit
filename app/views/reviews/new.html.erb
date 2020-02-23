@@ -1,0 +1,9 @@
+<h1>Request Review</h1>
+
+<%= form_for @review do |f| %> 
+    <%= f.label :project %> 
+    <%= f.collection_select :project, current_user.projects.order(:title), :title, :title %><br>
+    <%= f.submit "Request Review" %>
+<% end %> 
+
+    

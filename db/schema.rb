@@ -53,10 +53,11 @@ ActiveRecord::Schema.define(version: 2020_02_23_164611) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "project_id"
     t.integer "reviewer_id"
     t.integer "reviewee_id"
-    t.boolean "accepted"
-    t.boolean "review_status"
+    t.boolean "accepted", default: false
+    t.boolean "review_status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
