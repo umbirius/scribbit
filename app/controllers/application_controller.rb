@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     def welcome
         user_session.clear
         @user = current_user
+        @posts = Post.all
     end 
 
     def current_project

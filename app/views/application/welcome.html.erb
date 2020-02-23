@@ -1,1 +1,11 @@
 <h1> Hi <%= @user.username%>, welcome to scribbit!</h1>
+
+<% @posts.each do |p| %> 
+    <%= p.name %>
+    <%= p.description %> 
+    <%= p.link %> 
+<% end %>
+
+<% if current_user.admin %>
+    <%= link_to "Add Post", new_post_path %>
+<% end %>
