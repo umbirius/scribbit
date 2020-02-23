@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
     def index 
-
+        @sub_reviews = current_user.requested_reviews
+        byebug
+        @req_reviews = Review.where.not(accepted: true, reviewee_id: 2)
     end
 
     def new 
@@ -8,7 +10,6 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        byebug
         @review = current_user.requested_reviews.build()
         @project = Project.find_by(title: params[:review][:project])
         @review.project = @project
