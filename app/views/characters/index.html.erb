@@ -1,15 +1,15 @@
 <h1>Characters</h1> 
 
-<%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
-    <%= f.label :filter %> 
-    <%= f.select :filter, ['none', 'name', 'age'], :selected => @filter %>
-    <%= f.submit "Filter" %>
-<% end %>
-
 <% if params[:project_id] %>
+
+    <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
+        <%= f.label :filter %> 
+        <%= f.select :filter, ['none', 'name', 'age'], :selected => @filter %>
+        <%= f.submit "Filter" %>
+    <% end %>
+
     <table>
         <tr>
-            <th>Project</th>
             <th>Name</th>
             <th>Age</th>
             <th>Bio</th>
@@ -18,7 +18,6 @@
         </tr>
         <% @characters.each do |c| %>
                 <tr> 
-                    <td><%= link_to c.project.title, project_path(c.project) %>
                     <td><%= link_to c.name, project_character_path(params[:project_id], c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
@@ -33,8 +32,15 @@
     <%= link_to "Back to #{Project.find(params[:project_id]).title} page", project_path(params[:project_id])%>  
 
 <% else %>
+    <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
+        <%= f.label :filter %> 
+        <%= f.select :filter, ['none', 'project', 'name', 'age'], :selected => @filter %>
+        <%= f.submit "Filter" %>
+    <% end %>
+
     <table>
         <tr>
+            <th>Project</th>
             <th>Name</th>
             <th>Age</th>
             <th>Bio</th>
@@ -43,6 +49,7 @@
         </tr>
         <% @characters.each do |c| %>
                 <tr> 
+                    <td><%= link_to c.project.title, project_path(c.project) %></td>
                     <td><%= link_to c.name, character_path(c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>

@@ -28,11 +28,25 @@ class SettsController < ApplicationController
 
     def index 
         if params[:project_id]
-            @setts = Project.find(params[:project_id]).setts
             @url = project_setts_path
+
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @setts = Project.find(params[:project_id]).setts.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @setts = Project.find(params[:project_id]).setts
+            end 
         else 
-            @setts = current_user.setts
             @url = setts_path
+
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @setts = current_user.setts.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @setts = current_user.setts
+            end 
         end 
     end 
 
