@@ -1,15 +1,16 @@
 <h1>Projects</h1>
 
-<p width="100">
 
-    <%= form_for :sorts, url: projects_path, html: { method: :get } do |f| %> 
-        <%= f.label :filter %> 
-        <%= f.select :filter, ['none', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'], :selected => @filter %>
-        <%= f.submit "Filter" %>
-    <% end %>
+<div class="row">
+    <div class="small-3 column">
+        <%= form_for :sorts, url: projects_path, html: { method: :get } do |f| %> 
+            <%= f.label :filter %> 
+            <%= f.select :filter, ['none', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'], :selected => @filter %>
+            <%= f.submit "Filter" %>
+        <% end %>
+    </div>
+</div>
 
-
-<p>Sort By Drop dowm form with partial that takes each drop down item and puts into method to pull info</p>
 <div>
     <table>
         <tr>

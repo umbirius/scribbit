@@ -31,7 +31,17 @@
     </header>
     <div class="row">
       <div class="small-3 columns"></div>
-      <div class="small-6 columns"><%= yield %></div>
+      <div class="small-6 columns">
+          <% if !!flash[:errors] %> 
+            <div class="callout alert">
+              <% flash[:errors].each do |e| %>
+                <div class="row"> <%= e %></div>
+              <% end %>
+            </div>
+          <% end %>
+  
+        <%= yield %>
+      </div>
       <div class="small-3 columns"></div>
     </div>
 
