@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+
+<header class="sticky-shrinknav-header">
+  <h1 class="sticky-shrinknav-header-title">scribbit</h1>
+  <ul class="menu align-center sticky-shrinknav-menu">
+  <li><%= link_to "Home", root_path %></li>
+  <li><%= link_to "Projects", projects_path %></li>
+  <li><%= link_to "Characters", characters_path %></li>
+  <li><%= link_to "Settings", setts_path %></li>
+  <li><%= link_to "Scenes", scenes_path %></li>
+  <li><%= link_to "Peer Reviews", reviews_path %></li>
+  <% if user_signed_in? %>
+    <li><%= link_to "Log Out", destroy_user_session_path, method: :delete  %></li>
+  <% else %>
+    <li><%= link_to "Sign Up", new_user_registration_path %></li>
+    <li><%= link_to "Sign In", new_user_session_path %></li>
+  <% end %>
+  </ul>
+</header>
+  
+
+
+<div class="row">
+    <div class="twelve columns"><br />
+      <header> 
+      <% if !!flash[:errors] %> 
+        <% flash[:errors].each do |e| %>
+          <%= e %><br>
+        <% end %>
+      <% end %>
+      </header>
+      <body>
+        <%= yield %>
+      </body>
+    </div>
+</div>
+
+</html>

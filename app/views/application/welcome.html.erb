@@ -1,11 +1,16 @@
-<h1> Hi <%= @user.username%>, welcome to scribbit!</h1>
+<div>
 
-<% @posts.each do |p| %> 
-    <%= p.name %>
-    <%= p.description %> 
-    <%= p.link %> 
-<% end %>
-
+<h3> Hi <%= @user.username%></h3>
+<div>
+    <% @posts.each do |p| %> 
+        <ul>
+            <h4><%= p.name %></h4>
+            <p><%= p.description %></p>
+            <li><%= p.link %><br></li>
+        </ul>
+    <% end %>
+</div>
 <% if current_user.admin %>
     <%= link_to "Add Post", new_post_path %>
 <% end %>
+</div>

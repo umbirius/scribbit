@@ -1,6 +1,6 @@
 <h1>Projects</h1>
 
-<p>
+<p width="100">
 
     <%= form_for :sorts, url: projects_path, html: { method: :get } do |f| %> 
         <%= f.label :filter %> 
@@ -13,12 +13,12 @@
 <div>
     <table>
         <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Form</th>
-            <th>Characters</th>
-            <th>Settings</th>
-            <th>Scenes</th>
+            <th width="200">Title</th>
+            <th width="200">Genre</th>
+            <th width="200">Form</th>
+            <th width="200">Characters</th>
+            <th width="200">Settings</th>
+            <th width="200">Scenes</th>
         </tr>
         <% @projects.each do |p| %>
             <tr>
