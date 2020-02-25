@@ -9,3 +9,6 @@
     <%= f.text_field :description %><br>
     <%= f.submit %>
 <% end %>
+
+<%= button_to "Delete Project", project_path(params[:id]), method: :delete %>
+<%= link_to 'Back to Projects',  projects_path %>
