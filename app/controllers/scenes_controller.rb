@@ -10,7 +10,6 @@ class ScenesController < ApplicationController
     end 
 
     def create
-        byebug
         if params[:project_id]
             @scene = current_project.scenes.build(scene_params)
         else 
