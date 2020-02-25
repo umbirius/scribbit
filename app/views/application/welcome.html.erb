@@ -5,8 +5,16 @@
     <% @posts.each do |p| %> 
         <ul>
             <h4><%= p.name %></h4>
+            <iframe width="560" height="315" 
+                src="<%= p.link %>" frameborder="0" 
+                allow="accelerometer; 
+                autoplay; 
+                encrypted-media; 
+                gyroscope; 
+                picture-in-picture" 
+                allowfullscreen>
+            </iframe>
             <p><%= p.description %></p>
-            <li><%= p.link %><br></li>
         </ul>
     <% end %>
 </div>
