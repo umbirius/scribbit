@@ -5,7 +5,7 @@
     <div class="small-3 column">
         <%= form_for :sorts, url: projects_path, html: { method: :get } do |f| %> 
             <%= f.label :filter %> 
-            <%= f.select :filter, ['none', 'title', 'genre', 'form', 'characters', 'settings', 'scenes'], :selected => @filter %>
+            <%= f.select :filter, ['none', 'title', 'genre', 'form'], :selected => @filter %>
             <%= f.submit "Filter" %>
         <% end %>
     </div>
@@ -20,6 +20,9 @@
             <th width="200">Characters</th>
             <th width="200">Settings</th>
             <th width="200">Scenes</th>
+            <th></th>
+            <th></th>
+
         </tr>
         <% @projects.each do |p| %>
             <tr>
@@ -29,6 +32,9 @@
                 <td><%= p.characters.count %></td>
                 <td><%= p.setts.count %></td>
                 <td><%= p.scenes.count %></td>
+                <td><%=link_to 'Edit', edit_project_path(p)%></td>
+                <td><%= button_to "Delete", project_path(p), method: :delete %>
+                </td>
             </tr>
         <% end %>
     </table>
