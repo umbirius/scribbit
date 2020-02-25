@@ -1,7 +1,7 @@
 <%= form_for @scene, url: @url, html: { method: :patch } do |f| %> 
     <% if !params[:project_id] %>
         <%= f.label :project %> 
-        <%= f.collection_select :project, current_user.projects.order(:title), :title, :title %><br>
+        <%= f.collection_select :project, current_user.projects.order(:title), :title, :title, :selected => @scene.project.title %><br>
     <% end %> 
     <%= f.label :title %> 
     <%= f.text_field :title %><br> 
