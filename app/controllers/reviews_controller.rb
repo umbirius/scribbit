@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
     def index 
         @sub_reviews = current_user.requested_reviews
         @acc_reviews = current_user.accepted_reviews
-        @req_reviews = Review.where.not(accepted: true, reviewee_id: 2)
+        @req_reviews = Review.where.not(accepted: true, reviewee_id: current_user.id)
     end
 
     def new 

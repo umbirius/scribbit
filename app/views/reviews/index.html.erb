@@ -11,7 +11,11 @@
         <tr> 
             <td><%= rr.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= rr.project.title %></td>
-            <td><%= rr.reviewer %></td>
+            <% if rr.reviewer %>
+                <td><%= rr.reviewer.username %></td>
+            <% else %>
+                <td>Unassigned</td>
+            <% end %>
             <td><%= rr.accepted %></td>
             <td><%= rr.review_status%></td>
         <tr>
