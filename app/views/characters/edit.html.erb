@@ -11,3 +11,11 @@
     <%= f.text_field :bio %><br>
     <%= f.submit %>
 <% end %>
+
+<% if params[:project_id] %> 
+    <%= button_to "Delete Character", project_character_path(params[:project_id], @character), method: :delete %>
+    <%= link_to 'Back to Characters', project_characters_path(params[:project_id])%><br>
+<% else %> 
+    <%= button_to "Delete Character", character_path( @character), method: :delete %>
+    <%= link_to 'Back to Characters', characters_path()%><br>
+<% end %> 

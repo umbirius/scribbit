@@ -34,7 +34,7 @@
 <% else %>
     <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
         <%= f.label :filter %> 
-        <%= f.select :filter, ['none', 'project', 'name', 'age'], :selected => @filter %>
+        <%= f.select :filter, ['none', 'project_id', 'name', 'age'], :selected => @filter %>
         <%= f.submit "Filter" %>
     <% end %>
 
