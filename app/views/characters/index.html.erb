@@ -21,8 +21,8 @@
                     <td><%= link_to c.name, project_character_path(params[:project_id], c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
-                    <td><%= button_to "Delete", project_character_path(params[:project_id], c), method: :delete %></td>
                     <td><%= link_to 'Edit', edit_project_character_path(params[:project_id], c)%></td>
+                    <td><%= button_to "Delete", project_character_path(params[:project_id], c), method: :delete %></td>
                 </tr>
 
         <% end %> 
@@ -53,8 +53,8 @@
                     <td><%= link_to c.name, character_path(c) %></td>
                     <td><%=c.age%></td>
                     <td><%=c.bio%></td>
-                    <td><%= button_to "Delete", character_path( c), method: :delete %></td>
                     <td><%= link_to 'Edit', edit_character_path( c)%></td>
+                    <td><%= button_to "Delete", character_path( c), method: :delete %></td>
                 </tr>
         <% end %> 
     </table>

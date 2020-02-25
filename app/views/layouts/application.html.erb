@@ -29,9 +29,9 @@
         <% end %>
       </ul>
     </header>
-    <div class="row">
-      <div class="small-3 columns"></div>
-      <div class="small-6 columns">
+    <div class="row background">
+      <div class="small-2 columns"></div>
+      <div class="small-8 columns mainbox">
           <% if !!flash[:errors] %> 
             <div class="callout alert">
               <% flash[:errors].each do |e| %>
@@ -42,7 +42,7 @@
   
         <%= yield %>
       </div>
-      <div class="small-3 columns"></div>
+      <div class="small-2 columns"></div>
     </div>
 
  
