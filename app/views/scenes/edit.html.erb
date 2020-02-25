@@ -11,3 +11,11 @@
     <%= f.text_field :order%><br>
     <%= f.submit %>
 <% end %>
+
+<% if params[:project_id] %> 
+    <%= button_to "Delete Scene", project_scene_path(params[:project_id], @scene), method: :delete %>
+    <%= link_to 'Back to Scenes', project_scenes_path(params[:project_id])%><br>
+<% else %> 
+    <%= button_to "Delete Scene", scene_path(@scene), method: :delete %>
+    <%= link_to 'Back to Scenes', scenes_path %><br>
+<% end %> 

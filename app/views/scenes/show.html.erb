@@ -1,4 +1,7 @@
 <h1><%= @scene.title %></h1>
+<p> Order: <%= @scene.order %><p> 
+<p>Description: <%= @scene.description %></p>
+
 <% if params[:project_id] %> 
     <%= link_to 'Back to Scenes', project_scenes_path(params[:project_id])%><br>
     <%= link_to 'Edit Scene', edit_project_scene_path(params[:project_id], @scene)%><br>
