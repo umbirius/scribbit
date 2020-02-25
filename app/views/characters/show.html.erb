@@ -1,6 +1,7 @@
 <h1><%= @character.name %></h1>
 <p>Age: <%= @character.age %></p>
-<p>Bio: <%= @character.bio %></p>
+<P>Bio:</p> 
+<p> <%= @character.bio %></p>
 <% if params[:project_id] %> 
     <%= link_to 'Back to Characters', project_characters_path(params[:project_id])%><br>
     <%= link_to 'Edit Character', edit_project_character_path(params[:project_id], @character)%><br> 

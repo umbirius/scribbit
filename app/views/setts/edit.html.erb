@@ -11,3 +11,11 @@
     <%= f.text_field :description %><br>
     <%= f.submit %>
 <% end %>
+
+<% if params[:project_id] %>
+    <%= button_to "Delete Setting", project_sett_path(params[:id], @sett), method: :delete %>
+    <%= link_to 'Back to Settings', project_setts_path(params[:project_id]) %><br>
+<% else %> 
+    <%= button_to "Delete Setting", sett_path(@sett), method: :delete %>
+    <%= link_to 'Back to Settings', setts_path %><br>
+<% end %> 

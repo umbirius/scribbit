@@ -1,4 +1,9 @@
 <h1><%= @sett.name %></h1>
+<p>Location:</p>
+<p><%= @sett.location %> </p>
+<p>Description:</p>
+<p><%= @sett.description %></p>
+
 <% if params[:project_id] %>
     <%= link_to 'Back to Settings', project_setts_path(params[:project_id]) %><br>
     <%= link_to 'Edit Setting', edit_project_sett_path(params[:project_id], @sett) %><br>
