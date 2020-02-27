@@ -11,13 +11,9 @@
         <tr> 
             <td><%= rr.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= rr.project.title %></td>
-            <% if rr.reviewer %>
-                <td><%= rr.reviewer.username %></td>
-            <% else %>
-                <td>Unassigned</td>
-            <% end %>
-            <td><%= rr.accepted %></td>
-            <td><%= rr.review_status%></td>
+            <td><%= rr.reviewer ? rr.reviewer.username : "-" %></td>
+            <td><%= rr.accepted ? "Accepted" : "Pending" %></td>
+            <td><%= rr.review_status ? "Revieweed" : "Awaiting Review"%></td>
         <tr>
     <% end %> 
 </table>
@@ -36,11 +32,11 @@
     <% @acc_reviews.each do |rr| %> 
         <tr> 
             <td><%= rr.created_at.strftime("%m/%d/%Y")  %></td>
-            <td><%= User.find(rr.reviewee_id).username %></td>
+            <td><%= rr.reviewee.username %></td>
             <td><%= rr.project.title %></td>
             <td><%= rr.project.genre %></td>
-            <td><%= rr.accepted %></td>
-            <td><%= rr.review_status%></td>
+            <td><%= rr.accepted ? "Accepted" : "Pending" %></td>
+            <td><%= rr.review_status ? "Revieweed" : "Awaiting Review"%></td>
             <td><%= button_to "Cancel", review_path(rr), method: :patch, params: {accepted: false} %></td>
         <tr>
     <% end %> 
@@ -59,11 +55,11 @@
     <% @req_reviews.each do |rr| %> 
         <tr> 
             <td><%= rr.created_at.strftime("%m/%d/%Y")  %></td>
-            <td><%= User.find(rr.reviewee_id).username %></td>
+            <td><%= rr.reviewee.username %></td>
             <td><%= rr.project.title %></td>
             <td><%= rr.project.genre %></td>
-            <td><%= rr.accepted %></td>
-            <td><%= rr.review_status%></td>
+            <td><%= rr.accepted ? "Accepted" : "Pending" %></td>
+            <td><%= rr.review_status ? "Revieweed" : "Awaiting Review"%></td>
             <td><%= button_to "Accept", review_path(rr), method: :patch, params:{ accepted: true} %></td>
         <tr>
     <% end %> 
