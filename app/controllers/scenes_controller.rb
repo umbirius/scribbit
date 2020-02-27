@@ -29,11 +29,23 @@ class ScenesController < ApplicationController
 
     def index
         if params[:project_id]
-            @scenes = Project.find(params[:project_id]).scenes
             @url = project_scenes_path
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @scenes = Project.find(params[:project_id]).scenes.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @scenes = Project.find(params[:project_id]).scenes
+            end 
         else 
-            @scenes = current_user.scenes
             @url = scenes_path
+            if params[:sorts] && params[:sorts][:filter] != "none"
+                @filter = params[:sorts][:filter]
+                @scenes = current_user.scenes.sort_by_type(@filter)
+            else 
+                @filter = "none"
+                @scenes = current_user.scenes
+            end 
         end 
     end
 
