@@ -3,8 +3,8 @@
     <h1> <%=Project.find(params[:project_id]).title %>: Settings </h1> 
 
     <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
-        <%= f.label :filter %> 
-        <%= f.select :filter, ['none', 'name', 'age'], :selected => @filter %>
+        <%= f.label :filter, "Filter By:" %> 
+        <%= f.select :filter, ['none', 'name', 'location'], :selected => @filter %>
         <%= f.submit "Filter" %>
     <% end %>
 
@@ -32,8 +32,8 @@
     <h1>Settings</h1> 
 
     <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
-        <%= f.label :filter %> 
-        <%= f.select :filter, ['none', 'project_id', 'name', 'age'], :selected => @filter %>
+        <%= f.label :filter, "Filter By:" %> 
+        <%= f.select :filter, ['none', 'projects.title', 'name', 'location'], :selected => @filter %>
         <%= f.submit "Filter" %>
     <% end %>
 

@@ -4,10 +4,6 @@ class Sett < ApplicationRecord
     validates :location, presence:true
     validates :description, presence:true
 
-    scope :sort_by_type, -> (type) {reorder("LOWER(#{type})" +" "+ "asc")}
+    scope :sort_by_type, -> (type) {joins(:project).order("LOWER(#{type})")}
 
-    def self.sort_by_type(type)
-        (reorder("LOWER(#{type})" +" "+ "asc"))
-    end 
-    
 end
