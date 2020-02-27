@@ -19,8 +19,8 @@
         <% @characters.each do |c| %>
                 <tr> 
                     <td><%= link_to c.name, project_character_path(params[:project_id], c) %></td>
-                    <td><%=c.age%></td>
-                    <td><%=c.bio%></td>
+                    <td><%= c.age%></td>
+                    <td><%= c.bio%></td>
                     <td><%= link_to 'Edit', edit_project_character_path(params[:project_id], c)%></td>
                     <td><%= button_to "Delete", project_character_path(params[:project_id], c), method: :delete %></td>
                 </tr>

@@ -4,4 +4,5 @@ class Scene < ApplicationRecord
     validates :description, presence:true
     validates :order, uniqueness: {scope: :project}, numericality: true, allow_nil:true 
     
+    scope :sort_by_type, -> (type) {joins(:project).order("LOWER(#{type})")}
 end

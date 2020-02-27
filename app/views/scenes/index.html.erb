@@ -2,6 +2,12 @@
 
 <% if params[:project_id] %>
     <h1> <%=Project.find(params[:project_id]).title %>: Scenes </h1> 
+    <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
+        <%= f.label :filter, "Filter By:" %> 
+        <%= f.select :filter, ['none', 'name', 'location'], :selected => @filter %>
+        <%= f.submit "Filter" %>
+    <% end %>
+    
     <table>
         <tr>
             <th>Order</th>
@@ -22,6 +28,13 @@
     <%= link_to "Back to #{Project.find(params[:project_id]).title} page", project_path(params[:project_id])%>  
 <% else %>
     <h1>Scenes</h1> 
+
+    <%= form_for :sorts, url: @url, html: { method: :get } do |f| %> 
+        <%= f.label :filter, "Filter By:" %> 
+        <%= f.select :filter, ['none', 'projects.title', 'name', 'location'], :selected => @filter %>
+        <%= f.submit "Filter" %>
+    <% end %>
+
     <table>
         <tr>
             <th>Project</th>
