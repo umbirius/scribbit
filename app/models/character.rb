@@ -4,9 +4,6 @@ class Character < ApplicationRecord
     validates :age, presence:true
     validates :bio, presence:true
 
-    scope :sort_by_type, -> (type) {reorder("LOWER(#{type})" +" "+ "asc")}
+    scope :sort_by_type, -> (type) {joins(:project).order("LOWER(#{type})")}
 
-    def self.sort_by_type(type)
-        (reorder("LOWER(#{type})" +" "+ "asc"))
-    end 
 end
