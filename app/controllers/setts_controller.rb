@@ -17,8 +17,10 @@ class SettsController < ApplicationController
         end 
 
         if @sett.save && params[:project_id]
+            create_success(@sett.name)
             redirect_to project_setts_url(params[:project_id])
         elsif @sett.save && !params[:project_id]
+            create_success(@sett.name)
             redirect_to setts_url
         else 
             flash[:errors] = @sett.errors.full_messages
@@ -74,8 +76,10 @@ class SettsController < ApplicationController
         @sett = Sett.find(params[:id])
         @sett.update(sett_params)
         if @sett.save && params[:project_id]
+            update_success(@sett.name)
             redirect_to project_setts_url(params[:project_id])
         elsif @sett.save && !params[:project_id]
+            update_success(@sett.name)
             redirect_to setts_url
         else 
             flash[:errors] = @sett.errors.full_messages
@@ -88,6 +92,7 @@ class SettsController < ApplicationController
         @sett.destroy 
         flash[:notice] = "#{@sett.name} has been deleted"
         if params[:project_id]
+            destroy_success(@sett.name)
             redirect_to project_setts_path(params[:project_id])
         else 
             redirect_to setts_path
