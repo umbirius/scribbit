@@ -77,8 +77,10 @@ class CharactersController < ApplicationController
         @character = Character.find(params[:id])
         @character.update(character_params)
         if @character.save && params[:project_id]
+            edit_success
             redirect_to project_characters_url(params[:project_id])
         elsif @character.save && !params[:project_id]
+            edit_success
             redirect_to characters_url
         else 
             render :edit
@@ -90,15 +92,27 @@ class CharactersController < ApplicationController
         @character.destroy 
         flash[:notice] = "#{@character.name} has been deleted"
         if params[:project_id]
+            destroy_success
             redirect_to project_characters_path(params[:project_id])
         else 
+            destroy_success
             redirect_to characters_path
         end
     end
 
     def create_success
         flash[:success] = []
-        flash[:success] << "#{@character.name} has been created"
+        flash[:success] << "#{@character.name} has been successfully created"
+    end 
+
+    def edit_success
+        flash[:success] = []
+        flash[:success] << "#{@character.name} has been successfully updated"
+    end 
+
+    def destroy_success 
+        flash[:success] = []
+        flash[:success] << "#{@character.name} has been deleted"
     end 
 
     private 
