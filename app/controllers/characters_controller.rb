@@ -17,8 +17,10 @@ class CharactersController < ApplicationController
         end 
 
         if @character.save && params[:project_id]
+            create_success
             redirect_to project_characters_url(params[:project_id])
         elsif @character.save && !params[:project_id]
+            create_success
             redirect_to characters_url
         else 
             flash[:errors] = @character.errors.full_messages
@@ -94,8 +96,9 @@ class CharactersController < ApplicationController
         end
     end
 
-    def create_success 
-        flash[:success] = "#{@character.name} has been created"
+    def create_success
+        flash[:success] = []
+        flash[:success] << "#{@character.name} has been created"
     end 
 
     private 
