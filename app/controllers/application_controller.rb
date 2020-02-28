@@ -13,6 +13,21 @@ class ApplicationController < ActionController::Base
         Project.find(user_session["project"]["id"])
     end 
 
+
+    def create_success(display)
+        flash[:success] = []
+        flash[:success] << "#{display} has been successfully created"
+    end 
+
+    def edit_success(display)
+        flash[:success] = []
+        flash[:success] << "#{display} has been successfully updated"
+    end 
+
+    def destroy_success(display) 
+        flash[:success] = []
+        flash[:success] << "#{display} has been deleted"
+    end 
     protected 
 
     def configure_permitted_parameters

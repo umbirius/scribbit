@@ -95,6 +95,21 @@ class ScenesController < ApplicationController
             redirect_to scenes_path
         end
     end
+
+    def create_success
+        flash[:success] = []
+        flash[:success] << "#{@scene.title} has been successfully created"
+    end 
+
+    def edit_success
+        flash[:success] = []
+        flash[:success] << "#{@scene.title} has been successfully updated"
+    end 
+
+    def destroy_success 
+        flash[:success] = []
+        flash[:success] << "#{@scene.title} has been deleted"
+    end 
     private 
     def scene_params
         params.require(:scene).permit(:title, :description, :order)
