@@ -94,6 +94,10 @@ class CharactersController < ApplicationController
         end
     end
 
+    def create_success 
+        flash[:success] = "#{@character.name} has been created"
+    end 
+
     private 
     
     def character_params
