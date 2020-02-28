@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
     def create
         @project = current_user.projects.build(project_params)
         if @project.save
+            create_success(@project.title)
             redirect_to project_url(@project)
         else 
             flash[:errors] = @project.errors.full_messages
@@ -40,6 +41,7 @@ class ProjectsController < ApplicationController
         @project = Project.find(params[:id])
         @project.update(project_params)
         if @project.save
+            edit_success(@project.title)
             redirect_to project_url
         else 
             flash[:errors] = @project.errors.full_messages
@@ -50,7 +52,7 @@ class ProjectsController < ApplicationController
     def destroy 
         @project = Project.find(params[:id])
         @project.destroy 
-        flash[:notice] = "#{@project.title} has been deleted"
+        destrpy_success(@project.title)
         redirect_to projects_path
     end
 
