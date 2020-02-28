@@ -18,8 +18,10 @@ class ScenesController < ApplicationController
         end 
 
         if @scene.save && params[:project_id]
+            create_success(@scene.title)
             redirect_to project_scenes_url(params[:project_id])
         elsif @scene.save && !params[:project_id]
+            create_success(@scene.title)
             redirect_to scenes_url
         else 
             flash[:errors] = @scene.errors.full_messages
@@ -77,8 +79,10 @@ class ScenesController < ApplicationController
         @scene = Scene.find(params[:id])
         @scene.update(scene_params)
         if @scene.save && params[:project_id]
+            edit_success(@scene.title)
             redirect_to project_scenes_url(params[:project_id])
         elsif @scene.save && !params[:project_id]
+            edit_success(@scene.title)
             redirect_to scenes_url
         else 
             render :edit
@@ -90,26 +94,14 @@ class ScenesController < ApplicationController
         @scene.destroy 
         flash[:notice] = "#{@scene.title} has been deleted"
         if params[:project_id]
+            destroy_success(@scene.title)
             redirect_to project_scenes_path(params[:project_id])
         else 
+            destroy_success(@scene.title)
             redirect_to scenes_path
         end
     end
 
-    def create_success
-        flash[:success] = []
-        flash[:success] << "#{@scene.title} has been successfully created"
-    end 
-
-    def edit_success
-        flash[:success] = []
-        flash[:success] << "#{@scene.title} has been successfully updated"
-    end 
-
-    def destroy_success 
-        flash[:success] = []
-        flash[:success] << "#{@scene.title} has been deleted"
-    end 
     private 
     def scene_params
         params.require(:scene).permit(:title, :description, :order)
