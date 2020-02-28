@@ -34,9 +34,15 @@
       <div class="small-2 columns"></div>
       <div class="small-8 columns mainbox">
           <% if !!flash[:errors] %> 
-            <div class="callout alert">
+            <div class="callout alert" data-closable="slide-out-right">
               <% flash[:errors].each do |e| %>
-                <div class="row"> <%= e %></div>
+                  <li><%= e %></li>
+              <% end %>
+            </div>
+          <% elsif !!flash[:success] %> 
+            <div class="callout success" data-closable="slide-out-right">
+              <% flash[:success].each do |s| %>
+                  <li><%= s %></li>
               <% end %>
             </div>
           <% end %>
