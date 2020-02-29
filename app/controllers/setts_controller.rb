@@ -90,7 +90,6 @@ class SettsController < ApplicationController
     def destroy 
         @sett = Sett.find(params[:id])
         @sett.destroy 
-        flash[:notice] = "#{@sett.name} has been deleted"
         if params[:project_id]
             destroy_success(@sett.name)
             redirect_to project_setts_path(params[:project_id])

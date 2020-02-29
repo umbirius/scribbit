@@ -70,7 +70,6 @@ class ScenesController < ApplicationController
         if params[:project_id]
             @url = project_scene_path(params[:project_id], @scene)
         else 
-            flash[:errors] = @scene.errors.full_messages
             @url = scene_path(@scene)
         end 
     end 
@@ -85,6 +84,7 @@ class ScenesController < ApplicationController
             edit_success(@scene.title)
             redirect_to scenes_url
         else 
+            flash[:errors] = @scene.errors.full_messages
             render :edit
         end 
     end
@@ -92,7 +92,6 @@ class ScenesController < ApplicationController
     def destroy 
         @scene = Scene.find(params[:id])
         @scene.destroy 
-        flash[:notice] = "#{@scene.title} has been deleted"
         if params[:project_id]
             destroy_success(@scene.title)
             redirect_to project_scenes_path(params[:project_id])

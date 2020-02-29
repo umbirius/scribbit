@@ -68,7 +68,6 @@ class CharactersController < ApplicationController
         if params[:project_id]
             @url = project_character_path(params[:project_id], @character)
         else 
-            flash[:errors] = @character.errors.full_messages
             @url = character_path(@character)
         end 
     end 
@@ -83,6 +82,7 @@ class CharactersController < ApplicationController
             edit_success(@character.name)
             redirect_to characters_url
         else 
+            flash[:errors] = @character.errors.full_messages
             render :edit
         end 
     end
@@ -90,7 +90,6 @@ class CharactersController < ApplicationController
     def destroy 
         @character = Character.find(params[:id])
         @character.destroy 
-        flash[:notice] = "#{@character.name} has been deleted"
         if params[:project_id]
             destroy_success(@character.name)
             redirect_to project_characters_path(params[:project_id])
