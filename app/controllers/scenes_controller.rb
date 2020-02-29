@@ -24,7 +24,7 @@ class ScenesController < ApplicationController
             create_success(@scene.title)
             redirect_to scenes_url
         else 
-            flash[:errors] = @scene.errors.full_messages
+            errors_on_saving(@scene)
             render :new 
         end
     end 
@@ -84,8 +84,8 @@ class ScenesController < ApplicationController
             edit_success(@scene.title)
             redirect_to scenes_url
         else 
-            flash[:errors] = @scene.errors.full_messages
-            render :edit
+            errors_on_saving(@scene)
+            ender :edit
         end 
     end
 

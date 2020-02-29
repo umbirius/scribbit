@@ -23,7 +23,7 @@ class CharactersController < ApplicationController
             create_success(@character.name)
             redirect_to characters_url
         else 
-            flash[:errors] = @character.errors.full_messages
+            errors_on_saving(@character)
             render :new 
         end
     end
@@ -82,7 +82,7 @@ class CharactersController < ApplicationController
             edit_success(@character.name)
             redirect_to characters_url
         else 
-            flash[:errors] = @character.errors.full_messages
+            errors_on_saving(@character)
             render :edit
         end 
     end

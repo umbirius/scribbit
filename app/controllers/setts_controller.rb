@@ -23,7 +23,7 @@ class SettsController < ApplicationController
             create_success(@sett.name)
             redirect_to setts_url
         else 
-            flash[:errors] = @sett.errors.full_messages
+            errors_on_saving(@sett)
             render :new 
         end
     end 
@@ -82,7 +82,7 @@ class SettsController < ApplicationController
             update_success(@sett.name)
             redirect_to setts_url
         else 
-            flash[:errors] = @sett.errors.full_messages
+            errors_on_saving(@sett)
             render :edit
         end 
     end

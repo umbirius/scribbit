@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
             create_success(@project.title)
             redirect_to project_url(@project)
         else 
-            flash[:errors] = @project.errors.full_messages
+            errors_on_saving(@project)
             render :new
         end
     end
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
             edit_success(@project.title)
             redirect_to project_url
         else 
-            flash[:errors] = @project.errors.full_messages
+            errors_on_saving(@project)
             render :edit
         end 
     end
@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
     def destroy 
         @project = Project.find(params[:id])
         @project.destroy 
-        destrpy_success(@project.title)
+        destroy_success(@project.title)
         redirect_to projects_path
     end
 

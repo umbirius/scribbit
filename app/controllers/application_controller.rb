@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
         flash[:success] = []
         flash[:success] << "#{display} has been deleted"
     end 
+
+    def errors_on_saving(object)
+        flash.now[:errors] = object.errors.full_messages
+    end 
+
     protected 
 
     def configure_permitted_parameters
