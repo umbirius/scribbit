@@ -53,25 +53,36 @@ class CharactersController < ApplicationController
     end
 
     def show
-        @character = Character.find(params[:id])
-        redirect_if_not_user_owned(@character)
-        if params[:project_id]
-            @project = current_project 
-            @url = project_characters_path
+        if Character.find_by(id: params[:id])
+            @character = Character.find(params[:id])
+            redirect_if_not_user_owned(@character)
+            if params[:project_id]
+                @project = current_project 
+                @url = project_characters_path
+            else 
+                @url = characters_path
+            end 
         else 
-            @url = characters_path
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
     end
 
     def edit 
-        @character = Character.find(params[:id])
-        redirect_if_not_user_owned(@character)
-
-        if params[:project_id]
-            @url = project_character_path(params[:project_id], @character)
+        if Character.find_by(id: params[:id])
+            @character = Character.find(params[:id])
+            redirect_if_not_user_owned(@character)
+    
+            if params[:project_id]
+                @url = project_character_path(params[:project_id], @character)
+            else 
+                @url = character_path(@character)
+            end 
         else 
-            @url = character_path(@character)
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
+
     end 
 
     def update 
@@ -90,15 +101,20 @@ class CharactersController < ApplicationController
     end
 
     def destroy 
-        @character = Character.find(params[:id])
-        redirect_if_not_user_owned(@character)
-        @character.destroy 
-        if params[:project_id]
-            destroy_success(@character.name)
-            redirect_to project_characters_path(params[:project_id])
+        if Character.find_by(id: params[:id])
+            @character = Character.find(params[:id])
+            redirect_if_not_user_owned(@character)
+            @character.destroy 
+            if params[:project_id]
+                destroy_success(@character.name)
+                redirect_to project_characters_path(params[:project_id])
+            else 
+                destroy_success(@character.name)
+                redirect_to characters_path
+            end
         else 
-            destroy_success(@character.name)
-            redirect_to characters_path
+            unavailable_path
+            redirect_to root_url 
         end
     end
 
