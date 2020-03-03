@@ -45,13 +45,16 @@ class ApplicationController < ActionController::Base
         end 
     end
 
-    def redirect_if_not_exists
-        unavailable_path
-        redirect_to root_url 
+    def set_or_redirect_if_not_exists(klass, ob_var)
+        if klass.find_by(id: params[:id])
+            ob_var = klass.find(params[:id])
+        else 
+            redirect_to root_url 
+        end 
     end 
     
     def search_for_object(klass)
-        klass.find(params[:id])
+        klass.find_by(id: params[:id])
     end
 
 

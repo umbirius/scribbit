@@ -25,17 +25,23 @@ class ProjectsController < ApplicationController
     end
 
     def show
-        # redirect_if_not_exists(Project)
-        @project = Project.find(params[:id])
-        redirect_if_not_user_owned(@project)
-        @c_l = @project.characters.length
-        @s_l = @project.setts.length
-        @sc_l = @project.scenes.length
+        if Project.find_by(id: params[:id])
+            @project = Project.find(params[:id])
+            redirect_if_not_user_owned(@project)
+        else 
+            unavailable_path
+            redirect_to root_url 
+        end
     end
 
     def edit 
-        @project = Project.find(params[:id])
-        redirect_if_not_user_owned(@project)
+        if Project.find_by(id: params[:id])
+            @project = Project.find(params[:id])
+            redirect_if_not_user_owned(@project)
+        else 
+            unavailable_path
+            redirect_to root_url 
+        end
     end 
 
     def update 
@@ -51,11 +57,17 @@ class ProjectsController < ApplicationController
     end
 
     def destroy 
-        @project = Project.find(params[:id])
-        redirect_if_not_user_owned(@project)
-        @project.destroy 
-        destroy_success(@project.title)
-        redirect_to projects_path
+        if Project.find_by(id: params[:id])
+            @project = Project.find(params[:id])
+            redirect_if_not_user_owned(@project)
+            @project.destroy 
+            destroy_success(@project.title)
+            redirect_to projects_path
+        else 
+            unavailable_path
+            redirect_to root_url 
+        end
+
     end
 
     private 
