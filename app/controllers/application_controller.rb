@@ -33,11 +33,25 @@ class ApplicationController < ActionController::Base
         flash.now[:errors] = object.errors.full_messages
     end 
 
+    def unauthorized_path 
+        flash[:errors] = []
+        flash[:errors] << "Unauthorized path"
+    end
+
     protected 
 
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end 
+
+    def redirect_if_not_user_owned(object)
+        if object.user != current_user
+            unauthorized_path
+            redirect_to root_url 
+        end 
+    end
+
+    
     
 
 

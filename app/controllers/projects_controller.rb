@@ -26,10 +26,10 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        redirect_if_not_user_owned(@project)
         @c_l = @project.characters.length
         @s_l = @project.setts.length
         @sc_l = @project.scenes.length
-        user_session[:project] = @project
     end
 
     def edit 
