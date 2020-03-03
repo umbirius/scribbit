@@ -52,24 +52,34 @@ class ScenesController < ApplicationController
     end
 
     def show 
-        @scene = Scene.find(params[:id])
-        redirect_if_not_user_owned(@scene)
-        if params[:project_id]
-            @project = current_project 
-            @url = project_scenes_path
+        if Scene.find_by(id: params[:id])
+            @scene = Scene.find(params[:id])
+            redirect_if_not_user_owned(@scene)
+            if params[:project_id]
+                @project = current_project 
+                @url = project_scenes_path
+            else 
+                @url = scenes_path
+            end 
         else 
-            @url = scenes_path
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
     end
 
     def edit 
-        @scene = Scene.find(params[:id])
-        redirect_if_not_user_owned(@scene)
-        if params[:project_id]
-            @url = project_scene_path(params[:project_id], @scene)
+        if Scene.find_by(id: params[:id])
+            @scene = Scene.find(params[:id])
+            redirect_if_not_user_owned(@scene)
+            if params[:project_id]
+                @url = project_scene_path(params[:project_id], @scene)
+            else 
+                @url = scene_path(@scene)
+            end 
         else 
-            @url = scene_path(@scene)
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
     end 
 
     def update 
@@ -88,15 +98,20 @@ class ScenesController < ApplicationController
     end
 
     def destroy 
-        @scene = Scene.find(params[:id])
-        redirect_if_not_user_owned(@scene)
-        @scene.destroy 
-        if params[:project_id]
-            destroy_success(@scene.title)
-            redirect_to project_scenes_path(params[:project_id])
+        if Scene.find_by(id: params[:id])
+            @scene = Scene.find(params[:id])
+            redirect_if_not_user_owned(@scene)
+            @scene.destroy 
+            if params[:project_id]
+                destroy_success(@scene.title)
+                redirect_to project_scenes_path(params[:project_id])
+            else 
+                destroy_success(@scene.title)
+                redirect_to scenes_path
+            end
         else 
-            destroy_success(@scene.title)
-            redirect_to scenes_path
+            unavailable_path
+            redirect_to root_url 
         end
     end
 
