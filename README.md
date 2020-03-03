@@ -2,27 +2,28 @@
 
 ## About
 
-* Scribbit is a place where aspiring writers and story tellers can put "pen to paper" and help bring their thoughts to life. Equipped with tools to help organize characters, scenes, and settings, it will really help your projects grow. 
+Scribbit is a place where aspiring writers and story tellers can put "pen to paper" and help bring their thoughts to life. Equipped with tools to help organize characters, scenes, and settings, it will really help your projects grow. 
 
-* Want a second pair of eyes to look at your story? Good news for you as Scribbit offers a peer review system to enable a remote user to select your review request and comment on your project. 
+Want a second pair of eyes to look at your story? Good news for you as Scribbit offers a peer review system to enable a remote user to select your review request and comment on your project. 
 
-* Don't think too hard, just Scribbit!  
+Don't think too hard, just Scribbit!  
 
 ## Getting Started
 
-* clone the repository with 
+clone the repository with 
 ```ruby 
 git clone https://github.com/umbirius/scribbit.git 
 ```
 
-* Install the all relevant gems 
+Install the all relevant gems 
 ```ruby 
 bundle install
 ```
-* Start up your local host 
-``` rails s 
+Start up your local host 
+```ruby 
+rails s 
 ``` 
-* Access your local host and have fun! 
+Access your local host and have fun! 
 
 ## Contributing
 
