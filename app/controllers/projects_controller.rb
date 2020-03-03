@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
     end
 
     def show
+        # redirect_if_not_exists(Project)
         @project = Project.find(params[:id])
         redirect_if_not_user_owned(@project)
         @c_l = @project.characters.length
@@ -34,7 +35,7 @@ class ProjectsController < ApplicationController
 
     def edit 
         @project = Project.find(params[:id])
-
+        redirect_if_not_user_owned(@project)
     end 
 
     def update 
@@ -51,6 +52,7 @@ class ProjectsController < ApplicationController
 
     def destroy 
         @project = Project.find(params[:id])
+        redirect_if_not_user_owned(@project)
         @project.destroy 
         destroy_success(@project.title)
         redirect_to projects_path

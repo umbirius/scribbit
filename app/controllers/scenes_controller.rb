@@ -53,7 +53,7 @@ class ScenesController < ApplicationController
 
     def show 
         @scene = Scene.find(params[:id])
-
+        redirect_if_not_user_owned(@scene)
         if params[:project_id]
             @project = current_project 
             @url = project_scenes_path
@@ -64,6 +64,7 @@ class ScenesController < ApplicationController
 
     def edit 
         @scene = Scene.find(params[:id])
+        redirect_if_not_user_owned(@scene)
         if params[:project_id]
             @url = project_scene_path(params[:project_id], @scene)
         else 
@@ -88,6 +89,7 @@ class ScenesController < ApplicationController
 
     def destroy 
         @scene = Scene.find(params[:id])
+        redirect_if_not_user_owned(@scene)
         @scene.destroy 
         if params[:project_id]
             destroy_success(@scene.title)

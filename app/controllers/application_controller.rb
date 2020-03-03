@@ -33,10 +33,27 @@ class ApplicationController < ActionController::Base
         flash.now[:errors] = object.errors.full_messages
     end 
 
-    def unauthorized_path 
+    def unavailable_path 
         flash[:errors] = []
-        flash[:errors] << "Unauthorized path"
+        flash[:errors] << "Unavailable path"
     end
+
+    def redirect_if_not_user_owned(object)
+        if object.user != current_user
+            unavailable_path
+            redirect_to root_url 
+        end 
+    end
+
+    def redirect_if_not_exists
+        unavailable_path
+        redirect_to root_url 
+    end 
+    
+    def search_for_object(klass)
+        klass.find(params[:id])
+    end
+
 
     protected 
 
@@ -44,16 +61,7 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end 
 
-    def redirect_if_not_user_owned(object)
-        if object.user != current_user
-            unauthorized_path
-            redirect_to root_url 
-        end 
-    end
 
-    def redirect_if_not_exists(class)
-    end 
-    
 
 
 end

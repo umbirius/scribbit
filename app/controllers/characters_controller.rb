@@ -54,7 +54,7 @@ class CharactersController < ApplicationController
 
     def show
         @character = Character.find(params[:id])
-
+        redirect_if_not_user_owned(@character)
         if params[:project_id]
             @project = current_project 
             @url = project_characters_path
@@ -65,7 +65,8 @@ class CharactersController < ApplicationController
 
     def edit 
         @character = Character.find(params[:id])
-        
+        redirect_if_not_user_owned(@character)
+
         if params[:project_id]
             @url = project_character_path(params[:project_id], @character)
         else 
@@ -90,6 +91,7 @@ class CharactersController < ApplicationController
 
     def destroy 
         @character = Character.find(params[:id])
+        redirect_if_not_user_owned(@character)
         @character.destroy 
         if params[:project_id]
             destroy_success(@character.name)

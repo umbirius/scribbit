@@ -54,7 +54,7 @@ class SettsController < ApplicationController
 
     def show
         @sett = Sett.find(params[:id])
-
+        redirect_if_not_user_owned(@sett)
         if params[:project_id]
             @project = current_project
             @url = project_setts_path
@@ -65,6 +65,7 @@ class SettsController < ApplicationController
 
     def edit 
         @sett = Sett.find(params[:id])
+        redirect_if_not_user_owned(@sett)
         if params[:project_id]
             @url = project_sett_path(params[:project_id], @sett)
         else 
@@ -89,6 +90,7 @@ class SettsController < ApplicationController
 
     def destroy 
         @sett = Sett.find(params[:id])
+        redirect_if_not_user_owned(@sett)
         @sett.destroy 
         if params[:project_id]
             destroy_success(@sett.name)
