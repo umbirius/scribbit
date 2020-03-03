@@ -53,24 +53,35 @@ class SettsController < ApplicationController
     end 
 
     def show
-        @sett = Sett.find(params[:id])
-        redirect_if_not_user_owned(@sett)
-        if params[:project_id]
-            @project = current_project
-            @url = project_setts_path
+        if Sett.find_by(id: params[:id])
+            @sett = Sett.find(params[:id])
+            redirect_if_not_user_owned(@sett)
+            if params[:project_id]
+                @project = current_project
+                @url = project_setts_path
+            else 
+                @url = setts_path
+            end 
         else 
-            @url = setts_path
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
     end
 
     def edit 
-        @sett = Sett.find(params[:id])
-        redirect_if_not_user_owned(@sett)
-        if params[:project_id]
-            @url = project_sett_path(params[:project_id], @sett)
+        if Sett.find_by(id: params[:id])
+            @sett = Sett.find(params[:id])
+            redirect_if_not_user_owned(@sett)
+            if params[:project_id]
+                @url = project_sett_path(params[:project_id], @sett)
+            else 
+                @url = sett_path(@sett)
+            end 
         else 
-            @url = sett_path(@sett)
-        end 
+            unavailable_path
+            redirect_to root_url 
+        end
+
     end 
 
     def update 
@@ -89,14 +100,19 @@ class SettsController < ApplicationController
     end
 
     def destroy 
-        @sett = Sett.find(params[:id])
-        redirect_if_not_user_owned(@sett)
-        @sett.destroy 
-        if params[:project_id]
-            destroy_success(@sett.name)
-            redirect_to project_setts_path(params[:project_id])
+        if Sett.find_by(id: params[:id])
+            @sett = Sett.find(params[:id])
+            redirect_if_not_user_owned(@sett)
+            @sett.destroy 
+            if params[:project_id]
+                destroy_success(@sett.name)
+                redirect_to project_setts_path(params[:project_id])
+            else 
+                redirect_to setts_path
+            end
         else 
-            redirect_to setts_path
+            unavailable_path
+            redirect_to root_url 
         end
     end
 
