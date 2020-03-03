@@ -51,7 +51,8 @@ class ApplicationController < ActionController::Base
         end 
     end
 
-    
+    def redirect_if_not_exists(class)
+    end 
     
 
 

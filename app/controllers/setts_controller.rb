@@ -53,12 +53,12 @@ class SettsController < ApplicationController
     end 
 
     def show
+        @sett = Sett.find(params[:id])
+
         if params[:project_id]
             @project = current_project
-            @sett = Sett.find(params[:id])
             @url = project_setts_path
         else 
-            @sett = Sett.find(params[:id])
             @url = setts_path
         end 
     end
